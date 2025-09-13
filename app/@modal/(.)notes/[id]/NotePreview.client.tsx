@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 // Services
-import { fetchNoteById } from "@/lib/api";
+import { fetchNoteById } from "@/lib/api/clientApi";
 // components
 import NoteDetailMarkup from "@/components/NoteDetailMarkup/NoteDetailMarkup";
 
