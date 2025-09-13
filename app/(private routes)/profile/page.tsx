@@ -37,6 +37,7 @@ export default async function ProfilePage() {
             Edit Profile
           </Link>
         </div>
+
         <div className={css.avatarWrapper}>
           <Image
             src={user?.avatar || "/next.svg"}
