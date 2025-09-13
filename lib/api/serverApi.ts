@@ -7,6 +7,8 @@ import { cookies } from "next/headers";
 import { nextServer } from "./api";
 // types
 import { User } from "@/types/user";
+import { FetchNotesResponse, FetchNotesProprs } from "./clientApi";
+import { Note } from "@/types/note";
 
 // check session validity
 export const checkServerSession = async () => {
@@ -33,3 +35,33 @@ export const getServerMe = async (): Promise<User> => {
   });
   return data;
 };
+
+// fetch notes with optional filters
+export async function fetchServerNotes(params: FetchNotesProprs = {}): Promise<FetchNotesResponse> {
+  const cookieStore = await cookies();
+  const { search, tag, page, perPage, sortBy } = params;
+  const response = await nextServer.get<FetchNotesResponse>("/notes", {
+    params: {
+      search,
+      tag,
+      page,
+      perPage,
+      sortBy,
+    },
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return response.data;
+}
+
+// fetch note by id
+export async function fetchServerNoteById(id: Note["id"]): Promise<Note> {
+  const cookieStore = await cookies();
+  const response = await nextServer.get<Note>(`/notes/${id}`, {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return response.data;
+}

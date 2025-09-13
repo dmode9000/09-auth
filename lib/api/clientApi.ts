@@ -7,7 +7,7 @@ import { NewNote, Note, Tag } from "@/types/note";
 import { User } from "@/types/user";
 
 // type for parameters to /notes
-interface FetchNotesProprs {
+export interface FetchNotesProprs {
   search?: string;
   tag?: Tag;
   page?: number;
